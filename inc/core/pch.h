@@ -8,6 +8,7 @@
 #include <commctrl.h>
 #include <tchar.h>
 #include <tlhelp32.h>
+#include <intrin.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -22,7 +23,7 @@
 #include <memory>
 
 // ════════════════════════════════════════════════════════════════
-// Container headers (needed by various modules)
+// Container headers
 // ════════════════════════════════════════════════════════════════
 #include <map>
 #include <unordered_map>
@@ -46,7 +47,7 @@
 #include <new>
 
 // ════════════════════════════════════════════════════════════════
-// DirectX headers (for renderer)
+// DirectX headers
 // ════════════════════════════════════════════════════════════════
 #include <d3d11.h>
 #include <d3dcompiler.h>
@@ -71,7 +72,7 @@
 #include <thread>
 #include <chrono>
 
-// ── Basic type aliases (available everywhere) ───────────────
+// ── Basic type aliases ──────────────────────────────────────
 typedef uint8_t  u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
