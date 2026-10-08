@@ -1,6 +1,5 @@
 #pragma once
 #include "pch.h"
-#include "tools/scanner.h"
 
 namespace cheat
 {
