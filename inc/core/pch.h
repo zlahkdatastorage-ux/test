@@ -57,7 +57,6 @@
 #include <shared_mutex>
 #include <condition_variable>
 #include <atomic>
-#include <semaphore>
 
 // ════════════════════════════════════════════════════════════════
 // I/O headers
