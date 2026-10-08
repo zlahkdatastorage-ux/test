@@ -26,44 +26,36 @@ public:
     {
         static std::mutex mtx;
         std::lock_guard<std::mutex> lock(mtx);
-        if (level > s_Level) return;
+        if (level > s_Level || (level == LogLevel::Debug && !s_Debug))
+            return;
 
-        std::string line;
-        if (level == LogLevel::Debug && !s_Debug)
-        {
-            // skip debug lines in release builds
-        }
-        // timestamp
-        static const char* spaces = "                                                    ";
         SYSTEMTIME st;
         GetLocalTime(&st);
         char ts[32];
-        snprintf(ts, sizeof(ts), "%02d:%02d:%02d.%03d | ",
-                 st.wHour, st.wMinute, st.wSecond, (int)(GetTickCount() % 1000));
-        // color codes
-        const char* color = "";
+        snprintf(ts, sizeof(ts), "%02d:%02d:%02d.%03d",
+                 st.wHour, st.wMinute, st.wSecond,
+                 static_cast<int>(GetTickCount() % 1000));
+
+        const char* color = "\x1b[0m";
         switch (level)
         {
-        case LogLevel::Error:   color = "\x1b[31m"; break; // red
-        case LogLevel::Warning: color = "\x1b[33m"; break; // yellow
-        case LogLevel::Info:    color = "\x1b[32m"; break; // green
-        case LogLevel::Debug:   color = "\x1b[36m"; break; // cyan
-        case LogLevel::Trace:   color = "\x1b[35m"; break; // magenta
-        default:                color = "\x1b[0m"; break;
+        case LogLevel::Error:   color = "\x1b[31m"; break;
+        case LogLevel::Warning: color = "\x1b[33m"; break;
+        case LogLevel::Info:    color = "\x1b[32m"; break;
+        case LogLevel::Debug:   color = "\x1b[36m"; break;
+        case LogLevel::Trace:   color = "\x1b[35m"; break;
+        default: break;
         }
-        // Fix: store fileShort in a std::string to avoid dangling pointer
-        std::string fileShort = file.substr(file.find_last_of("\\/") + 1);
-        printf("[%s%u] %s%-5s%s | %s%s%s\n",
-               ts, __LINE__, color, fileShort.c_str(), "\x1b[0m",
-               message.c_str(), color, "", "");
+
+        if (s_LogToConsole)
+            printf("[%s] %sLOG\x1b[0m | %s\n", ts, color, message.c_str());
+
         if (s_LogToFile)
         {
-            static std::mutex mtx;
-            std::lock_guard<std::mutex> lock(mtx);
-            FILE* fp = fopen(s_LogFile.c_str(), "a");
-            if (fp)
+            FILE* fp = nullptr;
+            if (fopen_s(&fp, s_LogFile.c_str(), "a") == 0 && fp)
             {
-                fprintf(fp, "%s%s\n", message.c_str(), color);
+                fprintf(fp, "[%s] LOG | %s\n", ts, message.c_str());
                 fclose(fp);
             }
         }
