@@ -110,11 +110,11 @@ private:
 };
 
 // Helper macros matching common cheat conventions
-#define CH_LOG(level, ...) cheat::Logger::logLine(level, std::string(__VA_ARGS__))
+#define CH_LOG(level, ...) cheat::Logger::log(level, __FILE__, __LINE__, __VA_ARGS__)
 #define CH_ERROR(...) cheat::Logger::error(__VA_ARGS__)
 #define CH_WARN(...)  cheat::Logger::warn(__VA_ARGS__)
 #define CH_INFO(...)  cheat::Logger::info(__VA_ARGS__)
 #define CH_DEBUG(...) cheat::Logger::debug(__VA_ARGS__)
-#define CH_TRACE(...) cheat::Logger::logLine(LogLevel::Trace, __VA_ARGS__)
+#define CH_TRACE(...) cheat::Logger::log(LogLevel::Trace, __FILE__, __LINE__, __VA_ARGS__)
 
 } // namespace cheat
