@@ -19,8 +19,9 @@ void Logger::initialize(const std::string& filename, bool toConsole, bool toFile
     // Clear existing log file
     if (toFile)
     {
-        FILE* fp = fopen(filename.c_str(), "w");
-        if (fp) fclose(fp);
+        FILE* fp = nullptr;
+        if (fopen_s(&fp, filename.c_str(), "w") == 0 && fp)
+            fclose(fp);
     }
 }
 
@@ -61,20 +62,20 @@ void Logger::log(LogLevel level, const std::string& file, int line,
 
     if (s_LogToConsole)
     {
-        printf("[%s%u] %s%-5s%s | %s%s%s\n",
-               ts, line, color, fileShort, "\x1b[0m",
-               msg.c_str(), color, "", "");
+        printf("[%s%u] %s%-5s%s | %s%s\n",
+               ts, line, color, fileShort.c_str(), "\x1b[0m",
+               msg.c_str(), color);
     }
 
     if (s_LogToFile)
     {
         static std::mutex mtx;
         std::lock_guard<std::mutex> lock(mtx);
-        FILE* fp = fopen(s_LogFile.c_str(), "a");
-        if (fp)
+        FILE* fp = nullptr;
+        if (fopen_s(&fp, s_LogFile.c_str(), "a") == 0 && fp)
         {
             fprintf(fp, "[%s%u] %s%-5s%s | %s\n",
-                    ts, line, color, fileShort, "\x1b[0m",
+                    ts, line, color, fileShort.c_str(), "\x1b[0m",
                     msg.c_str());
             fclose(fp);
         }
