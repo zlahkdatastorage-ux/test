@@ -64,10 +64,6 @@ inline Vec2 worldToScreen(const Vec3& world, int width, int height)
 
 // ── Global renderer instance ────────────────────────────────
 // Note: This is defined in render.cpp, not here
-inline std::unique_ptr<IRenderer>& g_Renderer()
-{
-    static std::unique_ptr<IRenderer> s;
-    return s;
-}
+std::unique_ptr<IRenderer>& g_Renderer();
 
 } // namespace cheat
