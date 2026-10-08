@@ -39,6 +39,7 @@
 // Numeric / exception / C-string headers
 // ════════════════════════════════════════════════════════════════
 #include <limits>
+#include <type_traits>
 #include <stdexcept>
 #include <cstring>
 #include <cctype>
