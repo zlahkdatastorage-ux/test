@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "core/module.h"
+#include "core/cast.h"
 #include "game/video.h"
 
 namespace cheat
