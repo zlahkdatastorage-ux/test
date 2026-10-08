@@ -26,10 +26,10 @@ public:
     {
         static std::mutex mtx;
         std::lock_guard<std::mutex> lock(mtx);
-        if (level > g_Level()) return;
+        if (level > s_Level) return;
 
         std::string line;
-        if (level == LogLevel::Debug && !g_Debug())
+        if (level == LogLevel::Debug && !s_Debug)
         {
             // skip debug lines in release builds
         }
@@ -56,11 +56,11 @@ public:
         printf("[%s%u] %s%-5s%s | %s%s%s\n",
                ts, __LINE__, color, fileShort.c_str(), "\x1b[0m",
                message.c_str(), color, "", "");
-        if (g_LogToFile())
+        if (s_LogToFile)
         {
             static std::mutex mtx;
             std::lock_guard<std::mutex> lock(mtx);
-            FILE* fp = fopen(g_LogFile().c_str(), "a");
+            FILE* fp = fopen(s_LogFile.c_str(), "a");
             if (fp)
             {
                 fprintf(fp, "%s%s\n", message.c_str(), color);
@@ -84,14 +84,14 @@ public:
     static void error(const std::string& fmt, Args... args)
     {
         log(LogLevel::Error, __FILE__, __LINE__,
-            (fmt + "\n").c_str(), args...);
+            fmt.c_str(), args...);
     }
 
     template <typename... Args>
     static void warn(const std::string& fmt, Args... args)
     {
         log(LogLevel::Warning, __FILE__, __LINE__,
-            fmt + "\n", args...);
+            fmt.c_str(), args...);
     }
 
     template <typename... Args>
