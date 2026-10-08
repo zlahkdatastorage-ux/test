@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "core/hook.h"
+#include "core/logging.h"
 
 namespace cheat
 {
@@ -28,7 +29,7 @@ bool HookManager::install(const ProcessInfo& pi, uint64_t gameBase)
     // For now, we log that installation is a stub.
     std::string msg = "HookManager::install stub - hooks: ";
     msg += std::to_string(m_hooks.size());
-    CH_INFO("%s", msg);
+    CH_INFO("%s", msg.c_str());
     return true;
 }
 
