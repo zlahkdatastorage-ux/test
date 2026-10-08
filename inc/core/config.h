@@ -4,13 +4,13 @@
 namespace cheat
 {
 
-// ── Project version ─────────────────────────────────────────
 struct ProjectVersion
 {
     u16 major = 0;
     u16 minor = 0;
     u16 patch = 0;
     u16 build = 0;
+
     std::string toString() const
     {
         char buf[64];
@@ -19,33 +19,39 @@ struct ProjectVersion
     }
 };
 
-// ── Core configuration (runtime adjustable) ─────────────────
 struct CoreConfig
 {
     // Logging
-    bool   logToFile       = true;
-    bool   logToConsole    = true;
-    bool   logDebug        = false;
-    std::string logFile    = "cheat.log";
+    bool logToFile = true;
+    bool logToConsole = true;
+    bool logDebug = false;
+    std::string logFile = "cheat.log";
 
     // Injection / hooking
-    bool   verboseInject   = false;
-    bool   useSSRTng       = false;          // anti-anti-anti-cheat: SSR trampoline for hooks
-    bool   minimalHooks    = false;          // only hook what's needed
+    bool verboseInject = false;
+    bool useSSRTng = false;
+    bool minimalHooks = false;
 
     // Performance
-    float  frameRateTarget = 0.0f;           // 0 = unlimited
-    bool   useVSync        = false;
+    float frameRateTarget = 0.0f;
+    bool useVSync = false;
 
-    // Memory scanning (for Ros64.exe / game module)
-    bool   autoScan        = true;
-    u32    scanFrequencyHz = 100;
+    // Memory scanning
+    bool autoScan = true;
+    u32 scanFrequencyHz = 100;
 
-    // Anti-detect / resilience
-    bool   reuseTimer      = true;           // keep a single QPC timer for low overhead
-    bool   idleSleep       = true;           // sleep when no frames happen
+    // Runtime behavior
+    bool reuseTimer = true;
+    bool idleSleep = true;
+
+    // UI
+    int menuToggleKey = VK_INSERT;
+    bool showPerformance = true;
+    bool compactMenu = false;
 
     void resetToDefaults();
+    bool save(const std::string& path) const;
+    bool load(const std::string& path);
 };
 
 inline CoreConfig& g_Config()
