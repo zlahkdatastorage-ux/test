@@ -98,7 +98,7 @@ public:
     static void info(const std::string& fmt, Args... args)
     {
         log(LogLevel::Info, __FILE__, __LINE__,
-            fmt + "\n", args...);
+            (fmt + "\n").c_str(), args...);
     }
 
     template <typename... Args>
