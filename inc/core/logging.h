@@ -51,9 +51,10 @@ public:
         case LogLevel::Trace:   color = "\x1b[35m"; break; // magenta
         default:                color = "\x1b[0m"; break;
         }
-        const char* fileShort = file.substr(file.find_last_of("\\/") + 1).c_str();
+        // Fix: store fileShort in a std::string to avoid dangling pointer
+        std::string fileShort = file.substr(file.find_last_of("\\/") + 1);
         printf("[%s%u] %s%-5s%s | %s%s%s\n",
-               ts, __LINE__, color, fileShort, "\x1b[0m",
+               ts, __LINE__, color, fileShort.c_str(), "\x1b[0m",
                message.c_str(), color, "", "");
         if (g_LogToFile())
         {

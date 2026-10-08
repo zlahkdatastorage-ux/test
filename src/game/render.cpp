@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "game/render.h"
+#include "core/logging.h"
 
 namespace cheat
 {

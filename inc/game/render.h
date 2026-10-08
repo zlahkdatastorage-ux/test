@@ -47,8 +47,9 @@ public:
 // ── Renderer factory (returns a D3D11 renderer) ──────────────
 inline std::unique_ptr<IRenderer> createRenderer()
 {
-    // We'll use a D3D11-based renderer in src/game/render.cpp
-    return std::make_unique<IRenderer>();
+    // Create a stub renderer (will be implemented in src/game/render.cpp)
+    // Currently returns nullptr since full D3D11 implementation is pending
+    return nullptr;
 }
 
 // ── Coordinate transform: world point → screen point ────────
@@ -61,6 +62,7 @@ inline Vec2 worldToScreen(const Vec3& world, int width, int height)
 }
 
 // ── Global renderer instance ────────────────────────────────
+// Note: This is defined in render.cpp, not here
 inline std::unique_ptr<IRenderer>& g_Renderer()
 {
     static std::unique_ptr<IRenderer> s;

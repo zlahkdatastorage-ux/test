@@ -24,7 +24,7 @@ struct InputState
 
     // Aimbot override
     bool aimOverride = false;
-    Vec3 aimTarget;
+    cheat::Vec3 aimTarget;
 
     // Tick the input state
     void reset()

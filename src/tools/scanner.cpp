@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "tools/scanner.h"
 #include "core/module.h"
+#include "core/logging.h"
 
 namespace cheat
 {

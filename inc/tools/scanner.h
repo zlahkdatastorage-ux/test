@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "core/memory.h"
+#include "tools/pattern.h"
 
 namespace cheat
 {

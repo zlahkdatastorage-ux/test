@@ -52,10 +52,10 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>inc;inc/core;lib$(ProjectDir)inc;$(ProjectDir)lib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>inc;inc/core;lib;$(ProjectDir)inc;$(ProjectDir)lib</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;MYCHEAT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>^<LanguageStandard^>stdcpp17</LanguageStandard^>
-ECHO is off.
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
@@ -71,11 +71,12 @@ ECHO is off.
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>inc;inc/core;lib$(ProjectDir)inc;$(ProjectDir)lib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>inc;inc/core;lib;$(ProjectDir)inc;$(ProjectDir)lib</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;MYCHEAT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-ECHO is off.
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicObjects>true</IntrinsicObjects>
       <AdditionalOptions>/GL %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -92,7 +93,7 @@ ECHO is off.
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>inc;inc/core;lib$(ProjectDir)inc;$(ProjectDir)lib</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;MYCHEAT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>^<LanguageStandard^>stdcpp17</LanguageStandard^>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary><LanguageStandard>stdcpp17</LanguageStandard>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicObjects>true</IntrinsicObjects>
     </ClCompile>
@@ -108,11 +109,12 @@ ECHO is off.
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
-      <IntrinsicObjects>true</IntrinsicObjects>
-      <AdditionalIncludeDirectories>inc;inc/core;lib$(ProjectDir)inc;$(ProjectDir)lib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>inc;inc/core;lib;$(ProjectDir)inc;$(ProjectDir)lib</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;MYCHEAT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-ECHO is off.
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicObjects>true</IntrinsicObjects>
       <AdditionalOptions>/GL %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>

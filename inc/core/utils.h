@@ -1,5 +1,6 @@
 #pragma once
 #include "pch.h"
+#include <algorithm>  // Add this for std::transform
 
 namespace cheat
 {

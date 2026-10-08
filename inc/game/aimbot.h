@@ -47,11 +47,11 @@ inline AimbotConfig& g_Aimbot()
 
 // ── Aimbot targeting ────────────────────────────────────────
 // Returns the best target from a list based on config.
-inline Entity* findBestTarget(const std::vector<Entity>& targets)
+inline const Entity* findBestTarget(const std::vector<Entity>& targets)
 {
     if (!g_Aimbot().enabled || targets.empty()) return nullptr;
 
-    Entity* best = nullptr;
+    const Entity* best = nullptr;
     float bestScore = 0.0f;
 
     for (auto& e : targets)
