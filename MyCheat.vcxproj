@@ -155,6 +155,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ClInclude Include="inc\core\config.h" />
+    <ClInclude Include="inc\core\diagnostics.h" />
     <ClInclude Include="inc\core\logging.h" />
     <ClInclude Include="inc\core\utils.h" />
     <ClInclude Include="inc\core\process.h" />
@@ -177,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\config.cpp" />
+    <ClCompile Include="src\core\diagnostics.cpp" />
     <ClCompile Include="src\core\logging.cpp" />
     <ClCompile Include="src\core\utils.cpp" />
     <ClCompile Include="src\core\process.cpp" />
