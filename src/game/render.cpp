@@ -26,11 +26,8 @@ public:
             return false;
         }
 
-        // Get the backbuffer
-        ID3D11Texture2D* pBackBuffer = nullptr;
-        hr = m_pDevice->GetImmediateTransformation(nullptr, nullptr, nullptr, nullptr,
-                                                   &pBackBuffer); // Fake call for illustration
-        // In a real implementation, we'd get the swap chain first.
+        // This stub renderer does not own a swap chain/backbuffer yet.
+        // Device/context creation is sufficient for initialization.
 
         m_initialized = true;
         CH_INFO("D3D11Renderer initialized");
