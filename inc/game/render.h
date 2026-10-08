@@ -3,6 +3,7 @@
 #include "core/module.h"
 #include "core/cast.h"
 #include "game/video.h"
+#include "core/diagnostics.h"
 
 namespace cheat
 {
@@ -43,15 +44,13 @@ public:
 
     // Clean up internal resources
     virtual void cleanup() = 0;
+
+    virtual bool initialized() const = 0;
+    virtual FrameStats frameStats() const = 0;
 };
 
 // ── Renderer factory (returns a D3D11 renderer) ──────────────
-inline std::unique_ptr<IRenderer> createRenderer()
-{
-    // Create a stub renderer (will be implemented in src/game/render.cpp)
-    // Currently returns nullptr since full D3D11 implementation is pending
-    return nullptr;
-}
+std::unique_ptr<IRenderer> createRenderer();
 
 // ── Coordinate transform: world point → screen point ────────
 // In a real implementation this uses the view/projection matrix.
