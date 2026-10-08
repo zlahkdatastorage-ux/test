@@ -9,12 +9,61 @@ namespace cheat
 // ── Process information ─────────────────────────────────────
 struct ProcessInfo
 {
-    HANDLE  hProcess = INVALID_HANDLE_VALUE; // INVALID_HANDLE_VALUE = not open
+    HANDLE  hProcess = INVALID_HANDLE_VALUE;
     DWORD   pid      = 0;
     std::string name;
     std::string path;
-    uint64_t baseAddr = 0; // base address of loaded module (for main module)
-    bool    valid() const { return hProcess != INVALID_HANDLE_VALUE && pid != 0; }
+    uint64_t baseAddr = 0;
+
+    ProcessInfo() = default;
+    ~ProcessInfo() { close(); }
+
+    ProcessInfo(const ProcessInfo&) = delete;
+    ProcessInfo& operator=(const ProcessInfo&) = delete;
+
+    ProcessInfo(ProcessInfo&& other) noexcept
+        : hProcess(other.hProcess),
+          pid(other.pid),
+          name(std::move(other.name)),
+          path(std::move(other.path)),
+          baseAddr(other.baseAddr)
+    {
+        other.hProcess = INVALID_HANDLE_VALUE;
+        other.pid = 0;
+        other.baseAddr = 0;
+    }
+
+    ProcessInfo& operator=(ProcessInfo&& other) noexcept
+    {
+        if (this != &other)
+        {
+            close();
+            hProcess = other.hProcess;
+            pid = other.pid;
+            name = std::move(other.name);
+            path = std::move(other.path);
+            baseAddr = other.baseAddr;
+
+            other.hProcess = INVALID_HANDLE_VALUE;
+            other.pid = 0;
+            other.baseAddr = 0;
+        }
+        return *this;
+    }
+
+    void close()
+    {
+        if (hProcess != nullptr && hProcess != INVALID_HANDLE_VALUE)
+        {
+            CloseHandle(hProcess);
+            hProcess = INVALID_HANDLE_VALUE;
+        }
+    }
+
+    bool valid() const
+    {
+        return hProcess != nullptr && hProcess != INVALID_HANDLE_VALUE && pid != 0;
+    }
 };
 
 // ── Enumerate all processes ─────────────────────────────────
@@ -51,7 +100,7 @@ inline std::vector<ProcessInfo> enumerateProcesses()
                 }
                 CloseHandle(hModSnap);
             }
-            list.push_back(pi);
+            list.push_back(std::move(pi));
         } while (Process32NextW(hSnap, &pe));
     }
     CloseHandle(hSnap);
