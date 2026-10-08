@@ -19,6 +19,7 @@
 #include <string>
 #include <tuple>
 #include <utility>
+#include <memory>
 
 // ════════════════════════════════════════════════════════════════
 // Container headers (needed by various modules)
