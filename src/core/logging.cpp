@@ -25,7 +25,7 @@ void Logger::initialize(const std::string& filename, bool toConsole, bool toFile
 }
 
 void Logger::log(LogLevel level, const std::string& file, int line,
-                 const std::string& fmt, ...)
+                 const char* fmt, ...)
 {
     if (level > s_Level)
         return;
@@ -42,7 +42,7 @@ void Logger::log(LogLevel level, const std::string& file, int line,
     va_list args;
     va_start(args, fmt);
     char buf[4096];
-    vsnprintf(buf, sizeof(buf), fmt.c_str(), args);
+    vsnprintf(buf, sizeof(buf), fmt, args);
     va_end(args);
 
     const char* color = "\x1b[0m";
@@ -56,7 +56,7 @@ void Logger::log(LogLevel level, const std::string& file, int line,
     default:                color = "\x1b[0m"; break;
     }
 
-    const char* fileShort = file.substr(file.find_last_of("\\/") + 1).c_str();
+    std::string fileShort = file.substr(file.find_last_of("\\/") + 1);
     std::string msg = std::string(buf);
 
     if (s_LogToConsole)
