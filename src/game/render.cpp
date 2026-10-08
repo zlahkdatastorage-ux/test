@@ -93,6 +93,11 @@ private:
     bool m_initialized = false;
 };
 
+std::unique_ptr<IRenderer> createRenderer()
+{
+    return std::make_unique<D3D11Renderer>();
+}
+
 std::unique_ptr<IRenderer>& g_Renderer()
 {
     static std::unique_ptr<IRenderer> s = std::make_unique<D3D11Renderer>();
