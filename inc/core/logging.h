@@ -98,7 +98,7 @@ public:
     {
         if (s_Debug)
             log(LogLevel::Debug, __FILE__, __LINE__,
-                fmt + "\n", args...);
+                (fmt + "\n").c_str(), args...);
     }
 
 private:
