@@ -36,6 +36,7 @@ public:
 
     void render() override
     {
+        ScopedFrameProfile profile;
         // Present the backbuffer
         // In a real implementation, we'd get the backbuffer and create RTV
         if (m_hWnd)
@@ -65,6 +66,13 @@ public:
     void drawText(int x, int y, const std::string& text, uint32_t color, int flags) override
     {
         CH_INFO("drawText stub - x=%d y=%d text='%s' color=0x%X", x, y, text.c_str(), color);
+    }
+
+    bool initialized() const override { return m_initialized; }
+
+    FrameStats frameStats() const override
+    {
+        return g_FrameProfiler().stats();
     }
 
     void cleanup() override
