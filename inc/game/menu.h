@@ -146,6 +146,7 @@ private:
             break;
 
         case MenuTab::Performance:
+        {
             CH_INFO("Target FPS: %.1f", g_Config().frameRateTarget);
             CH_INFO("VSync     : %s", g_Config().useVSync ? "ON" : "OFF");
             CH_INFO("Perf panel: %s", g_Config().showPerformance ? "ON" : "OFF");
@@ -154,6 +155,7 @@ private:
                     stats.frameMs, stats.averageMs, stats.minMs, stats.maxMs);
             CH_INFO("Compact UI : %s", g_Config().compactMenu ? "ON" : "OFF");
             break;
+        }
 
         case MenuTab::Settings:
             CH_INFO("Log file  : %s", g_Config().logFile.c_str());
