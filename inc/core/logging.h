@@ -19,7 +19,7 @@ class Logger
 public:
     static void initialize(const std::string& filename, bool toConsole, bool toFile, LogLevel level);
 
-    static void log(LogLevel level, const std::string& file, int line, const std::string& fmt, ...);
+    static void log(LogLevel level, const std::string& file, int line, const char* fmt, ...);
 
     template <typename... Args>
     static void logLine(LogLevel level, const std::string& message)
@@ -84,7 +84,7 @@ public:
     static void error(const std::string& fmt, Args... args)
     {
         log(LogLevel::Error, __FILE__, __LINE__,
-            fmt + "\n", args...);
+            (fmt + "\n").c_str(), args...);
     }
 
     template <typename... Args>
