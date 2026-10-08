@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "core/config.h"
 #include "core/logging.h"
+#include "core/diagnostics.h"
 #include "game/esp.h"
 #include "game/aimbot.h"
 #include "game/noclip.h"
@@ -84,6 +85,17 @@ public:
             nextTab();
         else if (GetAsyncKeyState(VK_LEFT) & 1)
             previousTab();
+
+        if (GetAsyncKeyState(VK_F5) & 1)
+            saveConfig();
+        else if (GetAsyncKeyState(VK_F9) & 1)
+            loadConfig();
+        else if (GetAsyncKeyState(VK_F10) & 1)
+        {
+            g_Config().resetToDefaults();
+            CH_INFO("Configuration reset to defaults");
+            print();
+        }
     }
 
     MenuState state() const { return m_state; }
@@ -137,6 +149,9 @@ private:
             CH_INFO("Target FPS: %.1f", g_Config().frameRateTarget);
             CH_INFO("VSync     : %s", g_Config().useVSync ? "ON" : "OFF");
             CH_INFO("Perf panel: %s", g_Config().showPerformance ? "ON" : "OFF");
+            const FrameStats& stats = g_FrameProfiler().stats();
+            CH_INFO("Frame: %.3f ms | Avg: %.3f ms | Min: %.3f ms | Max: %.3f ms",
+                    stats.frameMs, stats.averageMs, stats.minMs, stats.maxMs);
             CH_INFO("Compact UI : %s", g_Config().compactMenu ? "ON" : "OFF");
             break;
 
