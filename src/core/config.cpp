@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "core/config.h"
+#include "core/utils.h"
 
 namespace cheat
 {
