@@ -85,6 +85,8 @@ bool CoreConfig::load(const std::string& path)
         const std::string key = cheat::toLower(cheat::trim(line.substr(0, eq)));
         const std::string value = cheat::trim(line.substr(eq + 1));
 
+        try
+        {
         if (section == "logging")
         {
             if (key == "logtofile") logToFile = std::stoi(value) != 0;
@@ -114,6 +116,11 @@ bool CoreConfig::load(const std::string& path)
             if (key == "menutogglekey") menuToggleKey = std::stoi(value);
             else if (key == "showperformance") showPerformance = std::stoi(value) != 0;
             else if (key == "compactmenu") compactMenu = std::stoi(value) != 0;
+        }
+        }
+        catch (const std::exception&)
+        {
+            // Ignore malformed individual values and retain the current/default value.
         }
     }
 
